@@ -58,7 +58,7 @@ fi
 #In linux for folder we have '-p' - It will check folder exists or not. If not it will create otherwise didn't give anything
 mkdir -p /app
 
-if [ -e backend.zip ]
+if [ -e /tmp/backend.zip ]
 then
     echo -e "$Y backend.zip file already exist...$N"
 else
@@ -66,5 +66,7 @@ else
     curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
     VALIDATE $? "Downloading backend code to tmp folder"
 fi
+
+
 
 
