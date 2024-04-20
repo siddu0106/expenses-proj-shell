@@ -81,8 +81,7 @@ VALIDATE $? "Unzipping backend code to app folder"
 npm install &>>$LOGFILE
 VALIDATE $? "Installing node.js dependencies"
 
-#cp /home/ec2-user/expenses-proj-shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
-cp /home/ec2-user/expenses-proj-shell/backend.service /tmp
+cp /home/ec2-user/expenses-proj-shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
 VALIDATE $? "Copied backend service to systemd/system folder"
 
 systemctl daemon-reload &>>$LOGFILE
