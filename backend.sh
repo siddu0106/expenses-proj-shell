@@ -9,6 +9,10 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+# pwd u have to enter ExpenseApp@1
+echo "Enter Password: "
+read -s PASS
+
 USER=$(id -u)
 
 if [ $USER -ne 0 ]
@@ -48,7 +52,7 @@ id expense
 
 if [ $? -ne 0 ]
 then    
-    useradd expense
+    useradd expense &>>$LOGFILE
     VALIDATE $? "Adding expense user"
 else    
     echo -e "$Y expense user already exists... $N"
@@ -64,18 +68,33 @@ then
     echo -e "$Y backend.zip file already exist in tmp directory...$N"
 else
     #Actually no need to check for .zip file bcz we can run this multiple times also, it won't throw any error. But am checking simply
-    curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+    curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOGFILE
     VALIDATE $? "Downloading backend code to tmp folder"
 fi
 
 
 cd /app
 
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Unzipping backend code to app folder"
 
-npm install
+npm install &>>$LOGFILE
 VALIDATE $? "Installing node.js dependencies"
 
+cp /home/ec2-user/expenses-proj-shell /etc/systemd/system/backend.service &>>$LOGFILE
+VALIDATE $? "Copied backend service to systemd/system folder"
 
+systemctl daemon-reload &>>$LOGFILE
+systemctl start backend &>>$LOGFILE
+systemctl enable backend &>>$LOGFILE
+systemctl status backend &>>$LOGFILE
+VALIDATE $? "Checking start, enable & status for backend service with systemctl commands"
 
+dnf install mysql -y &>>$LOGFILE
+VALIDATE $? "installing mysql client"
+
+mysql -h mysql.projexpenses78.online -uroot -p$PASS < /app/schema/backend.sql &>>$LOGFILE
+VALIDATE $? "Loading schema to MYSQL"
+
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "Restarting backend service"
