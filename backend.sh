@@ -71,16 +71,11 @@ fi
 
 cd /app
 
-APPFILES=$(ls -l)
+unzip /tmp/backend.zip
+VALIDATE $? "Unzipping backend code to app folder"
 
-if [ $? -eq 0 ]
-then
-    echo -e "$Y $APPFILES files already exist in app directory...$N"
-else
-    unzip /tmp/backend.zip
-    VALIDATE $? "Unzipping backend code to app folder"
-fi
-
+npm install
+VALIDATE $? "Installing node.js dependencies"
 
 
 
