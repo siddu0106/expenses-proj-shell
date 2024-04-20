@@ -54,17 +54,29 @@ else
     echo -e "$Y expense user already exists... $N"
 fi
 
-# we have to check whether folder exists or not.. if not then create otherwise skip it
+# we have to check whether folder exists or not.. if not then create.. otherwise skip it
 #In linux for folder we have '-p' - It will check folder exists or not. If not it will create otherwise didn't give anything
 mkdir -p /app
 
+# check for file exixts or not
 if [ -e /tmp/backend.zip ]
 then
-    echo -e "$Y backend.zip file already exist...$N"
+    echo -e "$Y backend.zip file already exist in tmp directory...$N"
 else
     #Actually no need to check for .zip file bcz we can run this multiple times also, it won't throw any error. But am checking simply
     curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
     VALIDATE $? "Downloading backend code to tmp folder"
+fi
+
+
+cd /app
+
+if [ -e /app/backend.zip ]
+then
+    echo -e "$Y backend.zip file already exist in app directory...$N"
+else
+    unzip /tmp/backend.zip
+    VALIDATE $? "Unzipping backend code to app folder"
 fi
 
 
