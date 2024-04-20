@@ -9,6 +9,10 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+# pwd u have to enter ExpenseApp@1
+echo "Enter Password: "
+read -s PASS
+
 USER=$(id -u)
 
 if [ $USER -ne 0 ]
@@ -54,12 +58,11 @@ mysql -h mysql.projexpenses78.online -uroot -pExpenseApp@1 -e 'show databases;'
 
 if [ $? -ne 0 ]
     then    
-        mysql_secure_installation --set-root-pass ExpenseApp@1  &>>$LOGFILE 
+        mysql_secure_installation --set-root-pass &PASS  &>>$LOGFILE 
         VALIDATE $? "Setting up root pwd for Mysql server"
        
     else 
         echo -e " $Y Password already setup...$N" 
-        exit 1
 fi 
 
 
