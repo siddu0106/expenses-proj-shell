@@ -43,7 +43,15 @@ VALIDATE $? "Starting Mysql server"
 systemctl status mysqld &>>$LOGFILE
 VALIDATE $? "Startus of Mysql server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+# If u run this command second time it will fail, bcz already password set
+
+mysql_secure_installation --set-root-pass ExpenseApp@1  &>>$LOGFILE 
 VALIDATE $? "Setting up root pwd for Mysql server"
+
+
+
+
+
+
 
 
