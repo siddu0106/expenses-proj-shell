@@ -46,8 +46,11 @@ VALIDATE $? "Startus of Mysql server"
 # If u run this command second time it will fail, bcz already password set
 # Error - Password already set, You cannot reset the password with mysql_secure_installation
 
-mysql_secure_installation --set-root-pass ExpenseApp@1  &>>$LOGFILE 
-VALIDATE $? "Setting up root pwd for Mysql server"
+#mysql_secure_installation --set-root-pass ExpenseApp@1  &>>$LOGFILE 
+#VALIDATE $? "Setting up root pwd for Mysql server"
+
+# below one is to check pwd already setup or not. If not then setup.
+mysql -h mysql.projexpenses78.online -uroot -pExpenseApp@1 -e 'show databases;'
 
 if [ $? -ne 0 ]
     then    
