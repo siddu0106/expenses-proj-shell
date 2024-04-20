@@ -82,7 +82,7 @@ npm install &>>$LOGFILE
 VALIDATE $? "Installing node.js dependencies"
 
 #cp /home/ec2-user/expenses-proj-shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
-cp /home/ec2-user/expenses-proj-shell/backend.service /tmp/backend.service
+cp /home/ec2-user/expenses-proj-shell/backend.service /tmp
 VALIDATE $? "Copied backend service to systemd/system folder"
 
 systemctl daemon-reload &>>$LOGFILE
