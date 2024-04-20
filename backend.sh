@@ -42,6 +42,14 @@ VALIDATE $? "Enable Node.js 20 version"
 dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "Install Node.js 20 version"
 
-useradd expense
-VALIDATE $? "Adding expense user"
+# check whether user exists or not. If not exist add the user. 
+# If user exists then it will return 0, if not 1.
+id expense 
 
+if [ $? -ne 0 ]
+then    
+    useradd expense
+    VALIDATE $? "Adding expense user"
+else    
+    echo -e "$Y expense user already exists... $N"
+fi
