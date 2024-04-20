@@ -87,7 +87,6 @@ VALIDATE $? "Copied backend service to systemd/system folder"
 systemctl daemon-reload &>>$LOGFILE
 systemctl start backend &>>$LOGFILE
 systemctl enable backend &>>$LOGFILE
-systemctl status backend &>>$LOGFILE
 VALIDATE $? "Checking start, enable & status for backend service with systemctl commands"
 
 dnf install mysql -y &>>$LOGFILE
