@@ -81,7 +81,8 @@ VALIDATE $? "Unzipping backend code to app folder"
 npm install &>>$LOGFILE
 VALIDATE $? "Installing node.js dependencies"
 
-cp /home/ec2-user/expenses-proj-shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
+#cp /home/ec2-user/expenses-proj-shell/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
+cp /home/ec2-user/expenses-proj-shell/backend.service /tmp/backend.service
 VALIDATE $? "Copied backend service to systemd/system folder"
 
 systemctl daemon-reload &>>$LOGFILE
@@ -92,6 +93,7 @@ VALIDATE $? "Checking start, enable & status for backend service with systemctl 
 dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "installing mysql client"
 
+# eventhough we load schema multiple time no pblm bcz they mentioned in backend.sql file if exists then only create otherwise no need
 mysql -h mysql.projexpenses78.online -uroot -p$PASS < /app/schema/backend.sql &>>$LOGFILE
 VALIDATE $? "Loading schema to MYSQL"
 
