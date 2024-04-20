@@ -45,7 +45,7 @@ systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting Mysql server"
 
 systemctl status mysqld &>>$LOGFILE
-VALIDATE $? "Startus of Mysql server"
+VALIDATE $? "Status of Mysql server"
 
 # If u run this command second time it will fail, bcz already password set
 # Error - Password already set, You cannot reset the password with mysql_secure_installation
@@ -62,7 +62,7 @@ if [ $? -ne 0 ]
         VALIDATE $? "Setting up root pwd for Mysql server"
        
     else 
-        echo -e " $Y Password already setup...$N" 
+        echo -e " $Y Password already setup for MYSQL...$N" 
 fi 
 
 
