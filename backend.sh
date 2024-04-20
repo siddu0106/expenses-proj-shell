@@ -74,7 +74,7 @@ fi
 
 
 cd /app
-
+rm -rf /app/*
 unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Unzipping backend code to app folder"
 
