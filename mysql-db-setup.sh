@@ -54,11 +54,12 @@ mysql -h mysql.projexpenses78.online -uroot -pExpenseApp@1 -e 'show databases;'
 
 if [ $? -ne 0 ]
     then    
-        echo -e " $Y Password already setup...$N" 
-        exit 1
-    else 
         mysql_secure_installation --set-root-pass ExpenseApp@1  &>>$LOGFILE 
         VALIDATE $? "Setting up root pwd for Mysql server"
+       
+    else 
+        echo -e " $Y Password already setup...$N" 
+        exit 1
 fi 
 
 
