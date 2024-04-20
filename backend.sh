@@ -71,10 +71,9 @@ fi
 
 cd /app
 
-if [ -e /app/backend ]
+if [ -e /app/* ]
 then
     echo -e "$Y backend file already exist in app directory...$N"
-    exit 1
 else
     unzip /tmp/backend.zip
     VALIDATE $? "Unzipping backend code to app folder"
