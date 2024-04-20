@@ -71,9 +71,11 @@ fi
 
 cd /app
 
-if [ -e /app/* ]
+APPFILES=$(ls -l)
+
+if [ $? -eq 0 ]
 then
-    echo -e "$Y backend file already exist in app directory...$N"
+    echo -e "$Y $APPFILES files already exist in app directory...$N"
 else
     unzip /tmp/backend.zip
     VALIDATE $? "Unzipping backend code to app folder"
