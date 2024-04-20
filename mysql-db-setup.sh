@@ -54,11 +54,11 @@ VALIDATE $? "Status of Mysql server"
 #VALIDATE $? "Setting up root pwd for Mysql server"
 
 # below one is to check pwd already setup or not. If not then setup.
-mysql -h mysql.projexpenses78.online -uroot -pExpenseApp@1 -e 'show databases;'
+mysql -h mysql.projexpenses78.online -uroot -p$PASS -e 'show databases;'
 
 if [ $? -ne 0 ]
     then    
-        mysql_secure_installation --set-root-pass &PASS  &>>$LOGFILE 
+        mysql_secure_installation --set-root-pass $PASS  &>>$LOGFILE 
         VALIDATE $? "Setting up root pwd for Mysql server"
        
     else 
