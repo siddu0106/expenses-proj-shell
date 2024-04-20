@@ -98,3 +98,6 @@ VALIDATE $? "Loading schema to MYSQL"
 
 systemctl restart backend &>>$LOGFILE
 VALIDATE $? "Restarting backend service"
+
+systemctl status backend &>>$LOGFILE
+VALIDATE $? "checking backend service status"
