@@ -71,9 +71,9 @@ fi
 
 cd /app
 
-if [ -e /app/backend.zip ]
+if [ -e /app/backend ]
 then
-    echo -e "$Y backend.zip file already exist in app directory...$N"
+    echo -e "$Y backend file already exist in app directory...$N"
     exit 1
 else
     unzip /tmp/backend.zip
